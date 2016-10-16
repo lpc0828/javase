@@ -5,7 +5,15 @@ package com.pengcheng.testlearn.stringtest;
  */
 public class MyString {
 
+    public static void changeValue(String name) {
+        name = new String("11111");
+    }
+
     public static void main(String[] args) {
+        String aa = new String("aaaa");
+        MyString.changeValue(aa);
+        System.out.println(aa);
+
         String a="111";
         String b="111";
         System.out.println(a==b);
@@ -44,6 +52,8 @@ public class MyString {
         b=new String("hello").intern();
         System.out.println("hello".intern()==b);
         System.out.println("hello".intern().equals(b));
+
+        System.out.println(100+200+"");
 
     }
 }
