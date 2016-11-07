@@ -15,6 +15,9 @@ public class CollectionTest {
         testContains();
     }
 
+    /**
+     * 测试结论： 判断是不是相同的对象，看 hashCode && equals
+     */
     public static void testContains() {
         Set<ContainTest> sets = Sets.newHashSet();
 
