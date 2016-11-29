@@ -13,15 +13,15 @@ public class ObjetStream {
 
     public static void main(String[] args) {
         // TODO自动生成的方法存根
-        ObjectOutputStream objectwriter=null;
-        ObjectInputStream objectreader=null;
+        ObjectOutputStream objectwriter = null;
+        ObjectInputStream objectreader = null;
 
         try {
-            objectwriter=new ObjectOutputStream(new FileOutputStream("files/student.txt"));
+            objectwriter = new ObjectOutputStream(new FileOutputStream("files/student.txt"));
             objectwriter.writeObject(new Student("gg", 22));
             objectwriter.writeObject(new Student("tt", 18));
             objectwriter.writeObject(new Student("rr", 17));
-            objectreader=new ObjectInputStream(new FileInputStream("files/student.txt"));
+            objectreader = new ObjectInputStream(new FileInputStream("files/student.txt"));
             for (int i = 0; i < 3; i++) {
                 System.out.println(objectreader.readObject());
             }
@@ -30,7 +30,7 @@ public class ObjetStream {
         } catch (ClassNotFoundException e) {
             // TODO自动生成的 catch 块
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 objectreader.close();
                 objectwriter.close();
@@ -44,7 +44,7 @@ public class ObjetStream {
 }
 
 
-class Student implements Serializable{
+class Student implements Serializable {
     private String name;
     private int age;
 
