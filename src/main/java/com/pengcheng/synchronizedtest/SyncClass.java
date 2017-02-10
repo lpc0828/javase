@@ -6,27 +6,35 @@ package com.pengcheng.synchronizedtest;
  */
 public class SyncClass {
 
-    private static int counter = 0;
+    private Integer counter = new Integer(0);
 
-    public synchronized void excute1() {
-        for (int i = 0; i < 20; i++) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void setCounter(Integer counter) {
+        this.counter = counter;
+    }
+
+    public void excute1() {
+        synchronized (counter) {
+            for (int i = 0; i < 20; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName()+" excute1 seq:" + i);
             }
-            System.out.println("excute1 seq:" + i);
         }
     }
 
-    public synchronized void excute2() {
-        for (int i = 0; i < 20; i++) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void excute2() {
+        synchronized (counter) {
+            for (int i = 0; i < 20; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName() + " excute2 seq:" + i);
             }
-            System.out.println("excute2 seq:" + i);
         }
     }
 
