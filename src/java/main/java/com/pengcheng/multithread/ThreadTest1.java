@@ -1,8 +1,5 @@
 package com.pengcheng.multithread;
 
-import sun.misc.Contended;
-import sun.misc.VM;
-
 /**
  * Created by IntelliJ IDEA.
  *

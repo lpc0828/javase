@@ -36,6 +36,10 @@ public class NumberTest {
         Integer id = Integer.valueOf(1000);
         System.out.println(ic == id);
         System.out.println("Integer IntegerCache test end <<<<<<<<<<<<<<<<<<<<");
+
+        Integer aa = new Integer(0);
+        Integer bb = new Integer(1000);
+        System.out.println(aa.getClass().equals(bb.getClass()));
     }
 
     public static void main(String[] args) {

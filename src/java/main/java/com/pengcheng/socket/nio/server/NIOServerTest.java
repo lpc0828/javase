@@ -2,8 +2,10 @@ package com.pengcheng.socket.nio.server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -52,6 +54,37 @@ public class NIOServerTest {
                         SocketChannel sc = socket.getChannel();
                         sc.configureBlocking(false);
                         sc.register(selector, SelectionKey.OP_READ);
+                    } else if (sKey.isReadable()) {
+                        ByteBuffer byteBuffer = ByteBuffer.allocate(32);
+                        SocketChannel sc = (SocketChannel) sKey.channel();
+                        String recvQ = "";
+                        while (true) {
+                            int readBytes = sc.read(byteBuffer);
+                            if (readBytes > 0) {
+                                recvQ += new String(byteBuffer.array(), 0, readBytes);
+                                byteBuffer.flip();
+                            } else {
+                                if (recvQ.length() > 0) {
+                                    ByteBuffer writeBuffer = ByteBuffer.wrap(recvQ.getBytes());
+                                    sc.write(writeBuffer);
+                                    writeBuffer.flip();
+                                }
+                                break;
+                            }
+                        }
+                        sc.register(selector, SelectionKey.OP_WRITE);
+                        sc.close();
+                    } else if (sKey.isWritable()) {
+                        ByteBuffer byteBuffer = (ByteBuffer) sKey.attachment();
+                        byteBuffer.flip();
+                        SocketChannel socketChannel = (SocketChannel) key.channel();
+                        socketChannel.write(byteBuffer);
+                        if (byteBuffer.hasRemaining()) {
+                            key.interestOps(SelectionKey.OP_READ);
+                        }
+                        byteBuffer.compact();
+                    } else if (sKey.isConnectable()) {
+
                     } else {
                         debug("NBTest: Channel not acceptable");
                     }
