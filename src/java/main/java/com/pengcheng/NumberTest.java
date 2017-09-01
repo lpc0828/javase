@@ -43,6 +43,12 @@ public class NumberTest {
     }
 
     public static void main(String[] args) {
-        NumberTest.testInteger();
+        //NumberTest.testInteger();
+
+        String sql = "{call PRO_RETURN_INT_RESULT(?, ?)}";
+        System.out.println(sql.matches("^\\{\\s*call\\s+[_|A-Z|0-9|a-z]+\\([?|,| ]+\\)\\s*\\}\\s*$"));
+
+        String reg = "{ call PRO_RETURN_INT_RESULT(?,?) }";
+        System.out.println(reg.matches("^\\{\\s*call\\s+[_|A-Z|0-9|a-z]+\\([?|,]+\\)\\s*\\}$"));
     }
 }

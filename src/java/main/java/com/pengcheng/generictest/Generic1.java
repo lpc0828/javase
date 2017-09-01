@@ -51,6 +51,7 @@ public class Generic1<T> {
         li.add(new Integer(3));
         oa[1] = li; // Unsound, but passes run time store check
         Object s = (Object) (lsa[1].get(0)); // Run-time error: ClassCastException.
+        Integer i = (Integer) s;
         System.out.println(s);
     }
 
